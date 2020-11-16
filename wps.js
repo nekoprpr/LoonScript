@@ -1,7 +1,7 @@
 const $ = new Env('WPS')
 $.VAL_signhomeurl = $.getdata('chavy_signhomeurl_wps')
 $.VAL_signhomeheader = $.getdata('chavy_signhomeheader_wps')
-
+ 
 !(async () => {
   $.log('', `🔔 ${$.name}, 开始!`, '')
   await loginapp()
