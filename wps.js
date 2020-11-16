@@ -143,7 +143,6 @@ function getquestion() {
 function answerquestion(optIdx) {
   return new Promise((resove) => {
     const body = `{"answer":"${optIdx}"}`
-    $.log(body)
     const url = { url: 'https://zt.wps.cn/2018/clock_in/api/answer?member=wps', body, headers: { sid: $.sid } }
         url.headers['Host'] = 'zt.wps.cn'
         url.headers['Content-Type'] = 'application/json'
@@ -172,6 +171,7 @@ function signwx() {
       try {
         if (error) throw new Error(error)
         const _data = JSON.parse(data)
+        $.log(data)
         $.signwx = {
           _raw: _data,
           isSuc: _data.result === 'ok' || (_data.result === 'error' && '已打卡' === _data.msg),
