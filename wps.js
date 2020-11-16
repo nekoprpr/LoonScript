@@ -172,7 +172,7 @@ function signwx() {
       try {
         if (error) throw new Error(error)
         const _data = JSON.parse(data)
-        $.log(_data)
+        $.log(data)
         $.signwx = {
           _raw: _data,
           isSuc: _data.result === 'ok' || (_data.result === 'error' && '已打卡' === _data.msg),
