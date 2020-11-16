@@ -262,41 +262,6 @@ function getUserInfo() {
   })
 }
 
-function invite() {
-  const sids = [
-    'V02S2UBSfNlvEprMOn70qP3jHPDqiZU00a7ef4a800341c7c3b',
-    'V02StVuaNcoKrZ3BuvJQ1FcFS_xnG2k00af250d4002664c02f',
-    'V02SWIvKWYijG6Rggo4m0xvDKj1m7ew00a8e26d3002508b828',
-    'V02Sr3nJ9IicoHWfeyQLiXgvrRpje6E00a240b890023270f97',
-    'V02SBsNOf4sJZNFo4jOHdgHg7-2Tn1s00a338776000b669579',
-    'V02ScVbtm2pQD49ArcgGLv360iqQFLs014c8062e000b6c37b6'
-  ]
-  $.invites = []
-  const inviteActs = []
-  $.log('', '开始邀请: ')
-  for (let sidIdx = 0; sidIdx < sids.length; sidIdx++) {
-    inviteActs.push(
-      new Promise((resove) => {
-        const body = `invite_userid=${$.userinfo.data.userid}`
-        const url = { url: 'http://zt.wps.cn/2018/clock_in/api/invite', body, headers: { sid: sids[sidIdx] } }
-        $.post(url, (error, response, data) => {
-          try {
-            if (error) throw new Error(error)
-            const _data = JSON.parse(data)
-            const _invite = { _raw: _data, inviteIdx: sidIdx, isSuc: _data.result === 'ok' }
-            $.invites.push(_invite)
-            $.log(`   邀请第 ${_invite.inviteIdx + 1} 个用户: ${_invite.isSuc ? '成功!' : '失败!'}`)
-          } catch (e) {
-            $.log(`❗️ ${$.name}, 执行失败!`, ` error = ${error || e}`, `response = ${JSON.stringify(response)}`, `data = ${data}`, '')
-          } finally {
-            resove()
-          }
-        })
-      })
-    )
-  }
-  return Promise.all(inviteActs)
-}
 
 function showmsg() {
   return new Promise((resove) => {
