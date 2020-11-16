@@ -100,7 +100,7 @@ async function answerwx() {
         await answerquestion(optionIdx + 1)
         if ($.answer.right) {
           $.answer.optionIdx = optionIdx
-          $.log('回答正确!')
+          $.log(`回答正确! 详情: ${$.answer._raw.msg}`)
           break
         } else {
           $.log(`回答错误! 详情: ${$.answer._raw.msg}`)
