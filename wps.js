@@ -142,7 +142,7 @@ function getquestion() {
 // 回答问题
 function answerquestion(optIdx) {
   return new Promise((resove) => {
-    const body = `answer=${optIdx}`
+    const body = `{"answer":"${optIdx}"}`
     $.log(body)
     const url = { url: 'https://zt.wps.cn/2018/clock_in/api/answer?member=wps', body, headers: { sid: $.sid } }
         url.headers['Host'] = 'zt.wps.cn'
