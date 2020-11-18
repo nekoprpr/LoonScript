@@ -8,10 +8,10 @@ $.VAL_signhomeheader = $.getdata('chavy_signhomeheader_wps')
   await signapp()
   await getquestion()
   await answerwx()
-  await signwx()
-  await signupwx()
+  // await signwx()
+  // await signupwx()
   await getUserInfo()
-  //await invite()
+  await invite()
   await getSigninfo()
   await getSignreward()
   await showmsg()
@@ -120,12 +120,6 @@ async function answerwx() {
 function getquestion() {
   return new Promise((resove) => {
     const url = { url: 'https://zt.wps.cn/2018/clock_in/api/get_question?award=wps', headers: { sid: $.sid } }
-        url.headers['Host'] = 'zt.wps.cn'
-        url.headers['Content-Type'] = 'application/json'
-        url.headers['Accept-Encoding'] = 'gzip, deflate, br'
-        url.headers['Connection'] = 'keep-alive'
-        url.headers['User-Agent'] = 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/7.0.18(0x17001229) NetType/WIFI Language/zh_CN'
-        url.headers['Referer'] = 'https://servicewechat.com/wx2f333d84a103825d/103/page-frame.html'
     $.get(url, (error, response, data) => {
       try {
         if (error) throw new Error(error)
@@ -142,14 +136,8 @@ function getquestion() {
 // 回答问题
 function answerquestion(optIdx) {
   return new Promise((resove) => {
-    const body = `{"answer":"${optIdx}"}`
+    const body = `answer=${optIdx}`
     const url = { url: 'https://zt.wps.cn/2018/clock_in/api/answer?member=wps', body, headers: { sid: $.sid } }
-        url.headers['Host'] = 'zt.wps.cn'
-        url.headers['Content-Type'] = 'application/json'
-        url.headers['Accept-Encoding'] = 'gzip, deflate, br'
-        url.headers['Connection'] = 'keep-alive'
-        url.headers['User-Agent'] = 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/7.0.18(0x17001229) NetType/WIFI Language/zh_CN'
-        url.headers['Referer'] = 'https://servicewechat.com/wx2f333d84a103825d/103/page-frame.html'
     $.post(url, (error, response, data) => {
       try {
         if (error) throw new Error(error)
@@ -171,7 +159,6 @@ function signwx() {
       try {
         if (error) throw new Error(error)
         const _data = JSON.parse(data)
-        $.log(data)
         $.signwx = {
           _raw: _data,
           isSuc: _data.result === 'ok' || (_data.result === 'error' && '已打卡' === _data.msg),
